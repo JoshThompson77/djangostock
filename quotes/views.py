@@ -1,3 +1,14 @@
+"""
+	Steps to push new code to github
+
+	git add . 
+
+	git commit -am "The reason for the commit"
+
+	git push
+ """
+
+
 from django.shortcuts import render, redirect
 from .models import stock
 from .forms import StockForm
