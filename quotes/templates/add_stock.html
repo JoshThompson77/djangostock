@@ -41,19 +41,21 @@
     </tr>
   </thead>
   <tbody>
-      {% if output %}
-        {% for outitem in output %}
+      {% if api %}
+        {% for k,v in api.items %}
+          {% for k2,v2 in v.items %}
           <tr>  
-            <td>{{ outitem.companyName}} </td>
-            <td>${{ outitem.latestPrice}} </td>
-            <td>${{ outitem.previousClose}} </td>
-            <td>{{ outitem.marketCap}} </td>
-            <td>{{ outitem.ytdChange}} </td>
-            <td>${{ outitem.week52High}} </td>
-            <td>${{ outitem.week52Low}} </td>
+            <td>{{ v2.companyName}} </td>
+            <td>${{ v2.latestPrice}} </td>
+            <td>${{ v2.previousClose}} </td>
+            <td>{{ v2.marketCap}} </td>
+            <td>{{ v2.ytdChange}} </td>
+            <td>${{ v2.week52High}} </td>
+            <td>${{ v2.week52Low}} </td>
             
 
           </tr>
+          {% endfor %}
 
       {% endfor %}
 

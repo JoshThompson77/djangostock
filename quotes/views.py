@@ -34,6 +34,9 @@ def home(request):
 	else:
 		return render(request, 'home.html', {'ticker': "Enter a Ticker Symbol Above"})
 
+		
+	return render(request, 'home.html', {'ticker': ticker, 'stuff': stuff, 'api': api, 'ticker2': ticker2})
+
 	
 def about(request):
 	return render(request, 'about.html', {})
@@ -55,21 +58,28 @@ def add_stock(request):
 
 		ticker = stock.objects.all()
 
-		output = []
-		for i in ticker:
+		stuff = ''
 
-			api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(i) + "/quote?&token=pk_0d91d44050cc4ca2973b9d485e05aae7")
-
-			try: 
-				api = json.loads(api_request.content)
-				output.append(api)
-
-			except Exception as e:
-				api = 'Error'
-				
+		for i in range(0, len(ticker)):
+			if i < len(ticker) -1:
+				stuff = stuff + str(ticker[i]) + ','
+			else:
+				stuff = stuff + str(ticker[i])
 
 
-		return  render(request, 'add_stock.html', {'ticker' : ticker, 'output': output})
+		api_request = requests.get("https://cloud.iexapis.com/stable/stock/market/batch?symbols=" + stuff + "&types=quote&token=pk_0d91d44050cc4ca2973b9d485e05aae7")
+
+
+		try:
+
+			api = json.loads(api_request.content)
+
+		except Exception as e:
+
+			api = 'Error'
+
+
+		return  render(request, 'add_stock.html', {'api': api})
 
 		
 def delete(request, stock_id):

@@ -3,13 +3,33 @@
 {% block content %}
 
 
-{% if ticker %}
-	{{ticker}}
-{% endif %}
+<!-- {% if ticker2 %}
+	{% for i in ticker2 %}
+		{{i}}<br/><br/>
+	{% endfor %}
+{% endif %} -->
 
-{% if api%}
+<!-- {{stuff}} -->
 
-	{% if api == 'Error' %}
+<!-- {{api}} -->
+
+{% for k,v  in api.items%}
+	{% for k2,v2 in v.items %}
+		Company: {{v2.companyName}}<br/>
+		Price: ${{v2.latestPrice}}<br/>
+		Previous Close: ${{v2.previousClose}}<br/>
+		Market Cap: {{v2.marketCap}}<br/>
+		Year to Date: {{v2.ytdChange}}<br/>
+		Year high: ${{v2.week52High}}<br/>
+		Year low: ${{v2.week52Low}}<br/>
+
+		<br/><br/>
+	{% endfor %}
+	
+
+{% endfor %}
+
+	<!-- {% if api == 'Error' %}
 
 		Please try again
 
@@ -25,9 +45,8 @@
 
 
 
-	{% endif %}
+	{% endif %} -->
 
-{% endif %}
 
 
 {% endblock %}
